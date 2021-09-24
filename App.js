@@ -113,6 +113,14 @@ export function ListActivity(){
         })
       }
 
+      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', position: "fixed", height: 150, left: 0, top: 475, right: 0, backgroundColor: "rgb(255, 255, 255)" }}>
+        <MaterialCommunityIcons name="folder-move" size={48} color="black" />
+        <Ionicons name="copy-sharp" size={48} color="black" />
+        <Ionicons name="information-circle" size={48} color="black" />
+        <Entypo name="share" size={48} color="black" />
+        <MaterialCommunityIcons name="bucket" size={48} color="black" />
+      </View>
+
     </View>
   )
 }
