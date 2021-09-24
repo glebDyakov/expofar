@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, CheckBox } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons'; 
@@ -47,26 +47,39 @@ export function ListActivity(){
     {
       name: "index.html",
       size: 255,
+      ext: "txt"
+    },
+    {
+      name: "style.css",
+      size: 100500,
+      ext: "apk"
     },
     {
       name: "App.js",
       size: 1024,
+      ext: "torrent"
     },
     {
       name: "photo.png",
       size: 256,
+      ext: "mp3"
     },
     {
       name: "index.js",
       size: 2048,
+      ext: "mp4"
     },
     {
       name: "index.php",
       size: 10,
+      ext: "img"
     }
   ])
 
   const [ totalSize, setTotalSize ] = useState(0)
+
+  const [ isSelectedCheckboxes, setSelectionCheckboxes ] = myFiles.map(myFile => useState(false))
+
   useEffect(async () => {
     
     // const dirInfo = await FileSystem.getInfoAsync(FileSystem.cacheDirectory);
@@ -96,12 +109,39 @@ export function ListActivity(){
       </View>
       
       {
-        myFiles.map(myFile => {
+        myFiles.map((myFile, myFileIdx) => {
           return (
             <View style={{ marginTop: 25 }}>
               <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                  
+                    <CheckBox
+                      value={isSelectedCheckboxes[myFileIdx]}
+                      onValueChange={setSelectionCheckboxes[myFileIdx]}
+                      style={{  }}
+                    />
+                 
+                  {/* <CheckBox
+                    style={{ alignSelf: "center" }}
+                    value={ false }
+                  /> */}
                 <View style={{ display: 'flex', flexDirection: 'column' }}>
-                  <FontAwesome name="folder" size={36} color="black" />
+                  {
+                    myFile.ext.includes("txt") ?
+                      <Ionicons name="md-document-text" size={24} color="rgb(255, 150, 0)" />
+                    : myFile.ext.includes("mp4")  ?
+                      <Entypo name="video" size={24} color="rgb(200, 0, 255)" />
+                    : myFile.ext.includes("mp3")  ?
+                      <Foundation name="music" size={24} color="rgb(0, 0, 255)" />
+                    : myFile.ext.includes("png")  ?
+                      <Entypo name="image-inverted" size={24} color="rgb(255, 0, 0)" />
+                    : myFile.ext.includes("apk")  ?
+                      <Text style={{ fontWeight: 700, color: "rgb(0, 255, 0)" }}>APK</Text>
+                    : myFile.ext.includes("img")  ?
+                      <FontAwesome name="folder" size={36} color="black" />
+                    : 
+                      <MaterialCommunityIcons name="folder-home" size={36} color="rgb(145, 145, 145)" />
+
+                  }
                 </View>
                 <View style={{ display: 'flex', width: "95%", flexDirection: 'column' }}>
                   <Text style={{ alignSelf: 'flex-start' }}>{ myFile.name }</Text>
@@ -113,12 +153,32 @@ export function ListActivity(){
         })
       }
 
-      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', position: "fixed", height: 150, left: 0, top: 475, right: 0, backgroundColor: "rgb(255, 255, 255)" }}>
-        <MaterialCommunityIcons name="folder-move" size={48} color="black" />
-        <Ionicons name="copy-sharp" size={48} color="black" />
-        <Ionicons name="information-circle" size={48} color="black" />
-        <Entypo name="share" size={48} color="black" />
-        <MaterialCommunityIcons name="bucket" size={48} color="black" />
+      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: "fixed", height: 150, left: 0, top: "calc(100% - 150px)", right: 0, backgroundColor: "rgb(255, 255, 255)" }}>
+        <TouchableOpacity onPress={() => {
+          console.log(`перемещаю файл`)
+        }}>
+          <MaterialCommunityIcons name="folder-move" size={48} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          console.log(`Копирую файл`)
+        }}>
+          <Ionicons name="copy-sharp" size={48} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          console.log(`информация о файле`)
+        }}>
+          <Ionicons name="information-circle" size={48} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          console.log(`Делюсь файлом`)
+        }}>
+          <Entypo name="share" size={48} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          console.log(`Удаляю файл`)
+        }}>
+          <MaterialCommunityIcons name="bucket" size={48} color="black" />
+        </TouchableOpacity>
       </View>
 
     </View>
