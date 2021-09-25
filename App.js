@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, CheckBox } from 'react-native';
+import { StyleSheet, Text, View, CheckBox, ToastAndroid, BackHandler } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons'; 
@@ -94,6 +94,12 @@ export function ListActivity(){
     setTotalSize(totalSizeOfFiles)
   }, [])
 
+  const showToast = () => {
+    ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
+  };
+
+  const [ checkboxesVisible, setCheckboxesVisible ] = useState(true)
+
   return (
     <View>
 
@@ -112,75 +118,87 @@ export function ListActivity(){
         myFiles.map((myFile, myFileIdx) => {
           return (
             <View style={{ marginTop: 25 }}>
+              <TouchableOpacity onLongPress={() => setCheckboxesVisible(!checkboxesVisible) }>
               <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                  {
+                    !checkboxesVisible ?
+                      <CheckBox
+                        value={isSelectedCheckboxes[myFileIdx]}
+                        onValueChange={setSelectionCheckboxes[myFileIdx]}
+                        style={{ display: checkboxesVisible ? 'none' : 'block' }}
+                      />
+                    :
+                    <Text></Text>
+                  }
                   
-                    <CheckBox
-                      value={isSelectedCheckboxes[myFileIdx]}
-                      onValueChange={setSelectionCheckboxes[myFileIdx]}
-                      style={{  }}
-                    />
-                 
                   {/* <CheckBox
                     style={{ alignSelf: "center" }}
                     value={ false }
                   /> */}
-                <View style={{ display: 'flex', flexDirection: 'column' }}>
-                  {
-                    myFile.ext.includes("txt") ?
-                      <Ionicons name="md-document-text" size={24} color="rgb(255, 150, 0)" />
-                    : myFile.ext.includes("mp4")  ?
-                      <Entypo name="video" size={24} color="rgb(200, 0, 255)" />
-                    : myFile.ext.includes("mp3")  ?
-                      <Foundation name="music" size={24} color="rgb(0, 0, 255)" />
-                    : myFile.ext.includes("png")  ?
-                      <Entypo name="image-inverted" size={24} color="rgb(255, 0, 0)" />
-                    : myFile.ext.includes("apk")  ?
-                      <Text style={{ fontWeight: 700, color: "rgb(0, 255, 0)" }}>APK</Text>
-                    : myFile.ext.includes("img")  ?
-                      <FontAwesome name="folder" size={36} color="black" />
-                    : 
-                      <MaterialCommunityIcons name="folder-home" size={36} color="rgb(145, 145, 145)" />
+                  
+                  <View style={{ display: 'flex', flexDirection: 'column' }}>
+                    {
+                      myFile.ext.includes("txt") ?
+                        <Ionicons name="md-document-text" size={24} color="rgb(255, 150, 0)" />
+                      : myFile.ext.includes("mp4")  ?
+                        <Entypo name="video" size={24} color="rgb(200, 0, 255)" />
+                      : myFile.ext.includes("mp3")  ?
+                        <Foundation name="music" size={24} color="rgb(0, 0, 255)" />
+                      : myFile.ext.includes("png")  ?
+                        <Entypo name="image-inverted" size={24} color="rgb(255, 0, 0)" />
+                      : myFile.ext.includes("apk")  ?
+                        <Text style={{ fontWeight: 700, color: "rgb(0, 255, 0)" }}>APK</Text>
+                      : myFile.ext.includes("img")  ?
+                        <FontAwesome name="folder" size={36} color="black" />
+                      : 
+                        <MaterialCommunityIcons name="folder-home" size={36} color="rgb(145, 145, 145)" />
 
-                  }
+                    }
+                  </View>
+                  <View style={{ display: 'flex', width: "95%", flexDirection: 'column' }}>
+                    <Text style={{ alignSelf: 'flex-start' }}>{ myFile.name }</Text>
+                    <Text style={{ alignSelf: 'flex-end' }}>{ `${myFile.size} байт` }</Text>
+                  </View>
                 </View>
-                <View style={{ display: 'flex', width: "95%", flexDirection: 'column' }}>
-                  <Text style={{ alignSelf: 'flex-start' }}>{ myFile.name }</Text>
-                  <Text style={{ alignSelf: 'flex-end' }}>{ `${myFile.size} байт` }</Text>
-                </View>
-              </View>
+              </TouchableOpacity>
             </View>
           )
         })
       }
 
-      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: "fixed", height: 150, left: 0, top: "calc(100% - 150px)", right: 0, backgroundColor: "rgb(255, 255, 255)" }}>
-        <TouchableOpacity onPress={() => {
-          console.log(`перемещаю файл`)
-        }}>
-          <MaterialCommunityIcons name="folder-move" size={48} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          console.log(`Копирую файл`)
-        }}>
-          <Ionicons name="copy-sharp" size={48} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          console.log(`информация о файле`)
-        }}>
-          <Ionicons name="information-circle" size={48} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          console.log(`Делюсь файлом`)
-        }}>
-          <Entypo name="share" size={48} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-          console.log(`Удаляю файл`)
-        }}>
-          <MaterialCommunityIcons name="bucket" size={48} color="black" />
-        </TouchableOpacity>
-      </View>
-
+      {
+        !checkboxesVisible ?
+          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: "fixed", height: 150, left: 0, top: "calc(100% - 150px)", right: 0, backgroundColor: "rgb(255, 255, 255)" }}>
+            <TouchableOpacity onPress={() => {
+              console.log(`перемещаю файл`)
+            }}>
+              <MaterialCommunityIcons name="folder-move" size={48} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              console.log(`Копирую файл`)
+            }}>
+              <Ionicons name="copy-sharp" size={48} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              console.log(`информация о файле`)
+              showToast()
+            }}>
+              <Ionicons name="information-circle" size={48} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              console.log(`Делюсь файлом`)
+            }}>
+              <Entypo name="share" size={48} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              console.log(`Удаляю файл`)
+            }}>
+              <MaterialCommunityIcons name="bucket" size={48} color="black" />
+            </TouchableOpacity>
+          </View>
+        :
+          <Text></Text>
+      }
     </View>
   )
 }
