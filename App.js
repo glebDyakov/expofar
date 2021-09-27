@@ -20,7 +20,7 @@ export default function App() {
   
   const Stack = createStackNavigator();
 
-  const testActivity = "ListActivity"
+  const testActivity = "AnalyzeActivity"
 
   return (
     <NavigationContainer>
@@ -36,7 +36,78 @@ export default function App() {
 export function AnalyzeActivity(){
   return (
     <View>
-      <Text>AnalyzeActivity</Text>
+      <View style={{ borderRadius: 15, backgroundColor: "rgb(255, 255, 255)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: 450 }}>
+        {/* <View style={{ marginVertical: 15 }}> */}
+          <Text style={{ fontSize: 18 }}>Память устройства</Text>
+        {/* </View> */}
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <Text style={{ alignSelf: 'flex-end', fontSize: 36, fontWeight: 700 }}>97%</Text>
+          <Text style={{ alignSelf: 'flex-end', fontSize: 16 }}> использовано</Text>
+        </View>
+
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <Text>31,09</Text>
+          <Text>32,00</Text>
+        </View>
+
+      </View>
+
+      <View style={{ marginVertical: 15, borderRadius: 15, backgroundColor: "rgb(255, 255, 255)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: 350 }}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+          <View>
+            <Text style={{ fontSize: 18 }}>Дублирование файлов</Text>
+            <Text>140 Мб</Text>
+          </View>
+          <View>
+            <Entypo name="chevron-thin-right" size={24} color="black" />
+          </View>
+        </View>
+        
+        <View style={{ width: "100%", height: 125, backgroundColor: "rgb(245, 245, 245)",display: 'flex', flexDirection: 'row' }}>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+        </View>
+
+      </View>
+      
     </View>
   )
 }
