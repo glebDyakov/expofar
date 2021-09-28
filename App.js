@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, CheckBox, ToastAndroid, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, CheckBox, ToastAndroid, BackHandler, ScrollView } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons'; 
@@ -15,6 +15,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import * as FileSystem from 'expo-file-system';
+
+import * as Progress from 'react-native-progress';
 
 export default function App() {
   
@@ -35,7 +37,7 @@ export default function App() {
 
 export function AnalyzeActivity(){
   return (
-    <View>
+    <ScrollView>
       <View style={{ borderRadius: 15, backgroundColor: "rgb(255, 255, 255)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: 450 }}>
         {/* <View style={{ marginVertical: 15 }}> */}
           <Text style={{ fontSize: 18 }}>Память устройства</Text>
@@ -44,15 +46,15 @@ export function AnalyzeActivity(){
           <Text style={{ alignSelf: 'flex-end', fontSize: 36, fontWeight: 700 }}>97%</Text>
           <Text style={{ alignSelf: 'flex-end', fontSize: 16 }}> использовано</Text>
         </View>
-
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
+        <Progress.Bar progress={ 97 } style={{ height: 45, backgroundColor: "rgb(0, 0, 255)" }} width={ "100%" } />
+        <View style={{ display: 'flex', flexDirection: 'row', width: "100%", justifyContent: 'space-between' }}>
           <Text>31,09</Text>
           <Text>32,00</Text>
         </View>
 
       </View>
 
-      <View style={{ marginVertical: 15, borderRadius: 15, backgroundColor: "rgb(255, 255, 255)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: 350 }}>
+      <View style={{ marginVertical: 15, borderRadius: 15, backgroundColor: "rgb(255, 255, 255)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
           <View>
             <Text style={{ fontSize: 18 }}>Дублирование файлов</Text>
@@ -62,8 +64,7 @@ export function AnalyzeActivity(){
             <Entypo name="chevron-thin-right" size={24} color="black" />
           </View>
         </View>
-        
-        <View style={{ width: "100%", height: 125, backgroundColor: "rgb(245, 245, 245)",display: 'flex', flexDirection: 'row' }}>
+        <View style={{ width: "100%", height: 125, backgroundColor: "rgb(245, 245, 245)",display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
           <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column' }}>
             <View style={{ alignSelf: 'center', height: '75%' }}>
               <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
@@ -105,10 +106,117 @@ export function AnalyzeActivity(){
             </View>
           </View>
         </View>
+      </View>
 
+      <View style={{ marginVertical: 15, borderRadius: 15, backgroundColor: "rgb(255, 255, 255)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+          <View>
+            <Text style={{ fontSize: 18 }}>Большие файлы</Text>
+            <Text>140 Мб</Text>
+          </View>
+          <View>
+            <Entypo name="chevron-thin-right" size={24} color="black" />
+          </View>
+        </View>
+        <View style={{ width: "100%", height: 125, backgroundColor: "rgb(245, 245, 245)",display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      <View style={{ marginVertical: 15, borderRadius: 15, backgroundColor: "rgb(255, 255, 255)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+          <View>
+            <Text style={{ fontSize: 18 }}>Неиспользуемые файлы</Text>
+            <Text>140 Мб</Text>
+          </View>
+          <View>
+            <Entypo name="chevron-thin-right" size={24} color="black" />
+          </View>
+        </View>
+        <View style={{ width: "100%", height: 125, backgroundColor: "rgb(245, 245, 245)",display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+          <View style={{ width: 175, height: 125, backgroundColor: "rgb(245, 245, 245)", borderWidth: 2, borderColor: "rgb(175, 175, 175)", display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ alignSelf: 'center', height: '75%' }}>
+              <MaterialCommunityIcons name="folder-home" size={72} color="rgb(145, 145, 145)" />
+            </View>
+            <View style={{  backgroundColor: "rgb(175, 175, 175)", height: '25%' }}>
+              <Text>
+                karl.zip
+              </Text>
+            </View>
+          </View>
+        </View>
       </View>
       
-    </View>
+    </ScrollView>
   )
 }
 
